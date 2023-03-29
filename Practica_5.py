@@ -11,6 +11,15 @@ class Memory_Management:
                 return int(kilobytes)
             else:
                 kilobytes = kilobytes + count_kb
+    
+    def Excess_space(self, kilobytes, position):
+        list_aux = self.memory_space
+        self.memory_space = []
+        for count in range(len(list_aux)):
+            if count == position:
+                self.memory_space.append(kilobytes)
+            self.memory_space.append(list_aux[count])
+        print(self.memory_space)
 
 
 def Read_File():
@@ -22,4 +31,4 @@ def Read_File():
 files = Read_File()
 memory = Memory_Management(files)
 
-print(memory.Memory_Space("1000kb"))
+print(memory.Excess_space("1000kb", 3))
