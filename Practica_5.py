@@ -21,6 +21,12 @@ class Memory_Management:
             self.memory_space.append(list_aux[count])
         print(self.memory_space)
 
+    def is_occupied(self, space):
+        if "." in space:
+            return True
+        else:
+            return False
+
 
 def Read_File():
     with open("archivos.txt", "r") as file:
@@ -31,4 +37,4 @@ def Read_File():
 files = Read_File()
 memory = Memory_Management(files)
 
-print(memory.Excess_space("1000kb", 3))
+print(memory.is_occupied("Hola.py"))
