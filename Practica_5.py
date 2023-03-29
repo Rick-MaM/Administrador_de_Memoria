@@ -80,6 +80,30 @@ class Memory_Management:
                 unused_memory = 0 
             self.file.pop(0)
         print(self.memory_space)
+    
+    def Mejor_ajuste(self):
+        while len(self.file) != 0:
+            Date = self.file[0].split(", ")
+            file_size = self.Memory_Space(Date[1])
+            mejor_ajuste = self.Best_option(file_size)
+
+            for count in range(len(self.memory_space)):
+                if self.is_occupied(self.memory_space[count]):
+                    pass
+                else:
+                    available_memory = self.Memory_Space(
+                        self.memory_space[count])
+                    if mejor_ajuste == available_memory and mejor_ajuste >= file_size:
+                        unused_memory = available_memory - file_size
+                        self.memory_space[count] = Date[0] + \
+                            " (" + str(file_size) + "kb" + ")"
+                        break
+            if unused_memory != 0:
+                unused_memory = str(unused_memory) + "kb"
+                self.Excess_space(unused_memory, count)
+
+            self.file.pop(0)
+        print(self.memory_space)
 
 
 def Read_File():
@@ -91,4 +115,4 @@ def Read_File():
 files = Read_File()
 memory = Memory_Management(files)
 
-print(memory.Primer_Ajuste())
+memory.Mejor_ajuste()
