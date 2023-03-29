@@ -26,6 +26,17 @@ class Memory_Management:
             return True
         else:
             return False
+        
+    def sort_memory(self):
+        new_list = []
+        for count in range(len(self.memory_space)):
+            if self.is_occupied(self.memory_space[count]):
+                pass
+            else:
+                kilobytes = self.Memory_Space(self.memory_space[count])
+                new_list.append(kilobytes)
+        new_list.sort()
+        return new_list[len(new_list)-1]
 
 
 def Read_File():
@@ -37,4 +48,4 @@ def Read_File():
 files = Read_File()
 memory = Memory_Management(files)
 
-print(memory.is_occupied("Hola.py"))
+print(memory.sort_memory())
