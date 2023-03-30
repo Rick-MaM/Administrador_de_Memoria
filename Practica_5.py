@@ -74,6 +74,8 @@ class Memory_Management:
                         unused_memory = available_memory - file_size
                         self.memory_space[count_memory_space] = Date[0] + " (" + str(file_size) + "kb" + ")"
                         break
+                if count_memory_space == len(self.memory_space) - 1:
+                    print("NO hay espacio suficiente para guardar ", Date[0])
             if unused_memory != 0:
                 unused_memory = str(unused_memory) + "kb"
                 self.Excess_space(unused_memory, count_memory_space)
@@ -98,6 +100,8 @@ class Memory_Management:
                         self.memory_space[count] = Date[0] + \
                             " (" + str(file_size) + "kb" + ")"
                         break
+                if count == len(self.memory_space) - 1:
+                    print("NO hay espacio suficiente para guardar ", Date[0])
             if unused_memory != 0:
                 unused_memory = str(unused_memory) + "kb"
                 self.Excess_space(unused_memory, count)
@@ -105,7 +109,7 @@ class Memory_Management:
             self.file.pop(0)
         print(self.memory_space)
     
-    def Peor_ajuste(self):  # Revisar Que no parte la memoria
+    def Peor_ajuste(self): 
         while len(self.file) != 0:
             Date = self.file[0].split(", ")
             file_size = self.Memory_Space(Date[1])
@@ -114,13 +118,15 @@ class Memory_Management:
                 if self.is_occupied(self.memory_space[count]):
                     pass
                 else:
-                    available_memory = self.Memory_Space(
-                        self.memory_space[count])
+                    available_memory = self.Memory_Space(self.memory_space[count])
                     if Peor_ajuste == available_memory and Peor_ajuste >= file_size:
                         unused_memory = available_memory - file_size
                         self.memory_space[count] = Date[0] + \
                             " (" + str(file_size) + "kb" + ")"
                         break
+                if count == len(self.memory_space) - 1:
+                    print("NO hay espacio suficiente para guardar ", Date[0])
+                    
             if unused_memory != 0:
                 unused_memory = str(unused_memory) + "kb"
                 self.Excess_space(unused_memory, count)
@@ -160,4 +166,4 @@ def Read_File():
 files = Read_File()
 memory = Memory_Management(files)
 
-memory.Siguiente_Ajuste()
+memory.Peor_ajuste()
