@@ -82,7 +82,7 @@ class Memory_Management:
             if unused_memory != 0:
                 unused_memory = str(unused_memory) + "kb"
                 self.Excess_space(unused_memory, count_memory_space)
-                unused_memory = 0 
+                unused_memory = 0
             self.file.pop(0)
     
     def Mejor_ajuste(self):
@@ -137,9 +137,11 @@ class Memory_Management:
 
     def Siguiente_Ajuste(self):
         count_memory_space = 0
+        previus_count = 0
         while len(self.file) != 0:
             Date = self.file[0].split(", ")
             file_size = self.Memory_Space(Date[1])
+
             while count_memory_space < len(self.memory_space):
                 if self.is_occupied(self.memory_space[count_memory_space]):
                     pass
@@ -148,13 +150,25 @@ class Memory_Management:
                     if file_size <= available_memory:
                         unused_memory = available_memory - file_size
                         self.memory_space[count_memory_space] = Date[0] + " (" + str(file_size) + "kb" + ")"
+                        self.file.pop(0)
                         break
                 count_memory_space += 1
+
             if unused_memory != 0:
                 unused_memory = str(unused_memory) + "kb"
                 self.Excess_space(unused_memory, count_memory_space)
                 unused_memory = 0
-            self.file.pop(0)
+
+            if count_memory_space == len(self.memory_space):
+                
+                if previus_count == 0:
+                    previus_count = count_memory_space
+                    count_memory_space = 0
+                else:
+                    print("NO hay espacio suficiente para guardar ", Date[0])
+                    self.file.pop(0)
+                
+            
 
 
 def Read_File():
@@ -238,8 +252,6 @@ def select(option):
         for count_memory in range(len(memory.memory_space)):
             print("|", memory.memory_space[count_memory], end="")
         print("|")
-        
-
 
 print("-----> 1. Primer ajuste <-----")
 print("       2. Mejor ajuste")
