@@ -129,6 +129,27 @@ class Memory_Management:
             self.file.pop(0)
         print(self.memory_space)
 
+    def Siguiente_Ajuste(self):
+        count_memory_space = 0
+        while len(self.file) != 0:
+            Date = self.file[0].split(", ")
+            file_size = self.Memory_Space(Date[1])
+            while count_memory_space < len(self.memory_space):
+                if self.is_occupied(self.memory_space[count_memory_space]):
+                    pass
+                else:
+                    available_memory = self.Memory_Space(self.memory_space[count_memory_space])
+                    if file_size <= available_memory:
+                        unused_memory = available_memory - file_size
+                        self.memory_space[count_memory_space] = Date[0] + " (" + str(file_size) + "kb" + ")"
+                        break
+                count_memory_space += 1
+            if unused_memory != 0:
+                unused_memory = str(unused_memory) + "kb"
+                self.Excess_space(unused_memory, count_memory_space)
+                unused_memory = 0
+            self.file.pop(0)
+        print(self.memory_space)
 
 def Read_File():
     with open("archivos.txt", "r") as file:
@@ -139,4 +160,4 @@ def Read_File():
 files = Read_File()
 memory = Memory_Management(files)
 
-memory.Peor_ajuste()
+memory.Siguiente_Ajuste()
