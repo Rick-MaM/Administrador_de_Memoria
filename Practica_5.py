@@ -84,7 +84,6 @@ class Memory_Management:
                 self.Excess_space(unused_memory, count_memory_space)
                 unused_memory = 0 
             self.file.pop(0)
-        print(self.memory_space)
     
     def Mejor_ajuste(self):
         while len(self.file) != 0:
@@ -110,7 +109,6 @@ class Memory_Management:
                 self.Excess_space(unused_memory, count)
 
             self.file.pop(0)
-        print(self.memory_space)
     
     def Peor_ajuste(self): 
         while len(self.file) != 0:
@@ -136,7 +134,6 @@ class Memory_Management:
                 unused_memory = 0
 
             self.file.pop(0)
-        print(self.memory_space)
 
     def Siguiente_Ajuste(self):
         count_memory_space = 0
@@ -158,7 +155,6 @@ class Memory_Management:
                 self.Excess_space(unused_memory, count_memory_space)
                 unused_memory = 0
             self.file.pop(0)
-        print(self.memory_space)
 
 
 def Read_File():
@@ -224,12 +220,24 @@ def select(option):
     memory = Memory_Management(files)
     if option == 0:
         memory.Primer_Ajuste()
+        for count_memory in range(len(memory.memory_space)):
+            print("|",memory.memory_space[count_memory],end="")
+        print("|")
     elif option == 1:
         memory.Mejor_ajuste()
+        for count_memory in range(len(memory.memory_space)):
+            print("|", memory.memory_space[count_memory], end="")
+        print("|")
     elif option == 2:
         memory.Peor_ajuste()
+        for count_memory in range(len(memory.memory_space)):
+            print("|", memory.memory_space[count_memory], end="")
+        print("|")
     elif option == 3:
         memory.Siguiente_Ajuste()
+        for count_memory in range(len(memory.memory_space)):
+            print("|", memory.memory_space[count_memory], end="")
+        print("|")
         
 
 
@@ -247,11 +255,10 @@ while True:
     elif caracter == 119:
         option -= 1
     elif caracter == 13:
-        
         if option == 4:
             break
         else:
             select(option)
-            input("ENTER para continuar...")
+            input("\nENTER para continuar...")
     os.system("cls")
     option = Menu(option)
