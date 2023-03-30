@@ -253,6 +253,8 @@ def select(option):
             print("|", memory.memory_space[count_memory], end="")
         print("|")
 
+
+print("\nPara moverse entre opciones: s: Abajo, w: Arriba")
 print("-----> 1. Primer ajuste <-----")
 print("       2. Mejor ajuste")
 print("       3. Peor ajuste")
