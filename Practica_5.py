@@ -1,3 +1,6 @@
+from msvcrt import getch
+import os
+option = 0
 
 class Memory_Management:
     def __init__(self, file):
@@ -157,13 +160,98 @@ class Memory_Management:
             self.file.pop(0)
         print(self.memory_space)
 
+
 def Read_File():
     with open("archivos.txt", "r") as file:
         lines = file.readlines()
     return lines
 
+def Menu(count_option):
+    if count_option == 0:
+        print("-----> 1. Primer ajuste <-----")
+        print("       2. Mejor ajuste")
+        print("       3. Peor ajuste")
+        print("       4. Siguiente ajuste")
+        print("       Salir")
 
-files = Read_File()
-memory = Memory_Management(files)
+    elif count_option == 1:
+        print("       1. Primer ajuste")
+        print("-----> 2. Mejor ajuste <-----")
+        print("       3. Peor ajuste")
+        print("       4. Siguiente ajuste")
+        print("       Salir")
 
-memory.Peor_ajuste()
+    elif count_option == 2:
+        print("       1. Primer ajuste")
+        print("       2. Mejor ajuste ")
+        print("-----> 3. Peor ajuste <-----")
+        print("       4. Siguiente ajuste")
+        print("       Salir")
+
+    elif count_option == 3:
+        print("       1. Primer ajuste")
+        print("       2. Mejor ajuste")
+        print("       3. Peor ajuste")
+        print("-----> 4. Siguiente ajuste <-----")
+        print("       Salir")
+
+    elif count_option == 4:
+        print("       1. Primer ajuste")
+        print("       2. Mejor ajuste")
+        print("       3. Peor ajuste")
+        print("       4. Siguiente ajuste")
+        print("-----> Salir <-----")
+
+    elif count_option >= 5:
+        print("-----> 1. Primer ajuste <-----")
+        print("       2. Mejor ajuste")
+        print("       3. Peor ajuste")
+        print("       4. Siguiente ajuste")
+        print("       Salir")
+        count_option = 0
+
+    elif count_option < 0:
+        print("       1. Primer ajuste")
+        print("       2. Mejor ajuste")
+        print("       3. Peor ajuste")
+        print("       4. Siguiente ajuste")
+        print("-----> Salir <-----")
+        count_option = 4
+    return count_option
+
+def select(option):
+    files = Read_File()
+    memory = Memory_Management(files)
+    if option == 0:
+        memory.Primer_Ajuste()
+    elif option == 1:
+        memory.Mejor_ajuste()
+    elif option == 2:
+        memory.Peor_ajuste()
+    elif option == 3:
+        memory.Siguiente_Ajuste()
+        
+
+
+print("-----> 1. Primer ajuste <-----")
+print("       2. Mejor ajuste")
+print("       3. Peor ajuste")
+print("       4. Siguiente ajuste")
+print("       Salir")
+
+while True:
+
+    caracter = ord(getch())
+    if caracter == 115:
+        option += 1
+    elif caracter == 119:
+        option -= 1
+    elif caracter == 13:
+        
+        if option == 4:
+            break
+        else:
+            select(option)
+            input("ENTER para continuar...")
+    os.system("cls")
+    option = Menu(option)
